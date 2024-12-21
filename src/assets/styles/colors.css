@@ -1,0 +1,37 @@
+/* src/styles/variables.css */
+:root {
+    /* Màu xanh */
+    --blue-light: #4D9DE0;
+    --blue-main: #1677FF;
+    --blue-dark: #15407F;
+    --blue-hover: #4096FF;
+
+    /* Màu đỏ */
+    --red-light: #FF6B6B;
+    --red-main: #DC3545;
+    --red-dark: #C82333;
+    --red-hover: #F55B5B;
+
+    /* Màu tím */
+    --purple-light: #9B6DFF;
+    --purple-main: #6F42C1;
+    --purple-dark: #553098;
+    --purple-hover: #825ACF;
+
+    /* Màu vàng */
+    --yellow-light: #FFE066;
+    --yellow-main: #FFC107;
+    --yellow-dark: #D39E00;
+    --yellow-hover: #FFD000;
+
+    /* Màu xám */
+    --gray-100: #F8F9FA;
+    --gray-200: #E9ECEF;
+    --gray-300: #DEE2E6;
+    --gray-400: #CED4DA;
+    --gray-500: #ADB5BD;
+    --gray-600: #6C757D;
+    --gray-700: #495057;
+    --gray-800: #343A40;
+    --gray-900: #212529;
+}
