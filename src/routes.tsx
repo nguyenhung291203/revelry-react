@@ -1,27 +1,25 @@
-// src/routes.tsx
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { ManagerProducts } from '@/pages'
+import { ManagerProducts, CreateProduct } from '@/pages'
 import { ReactNode } from 'react'
 
-// Define the interface for the route configuration
 interface RouteConfig {
-  path: string // Path for the route
-  element: ReactNode // Component to be rendered
-  exact?: boolean // Optional: whether the route matches exactly
+  path: string
+  element: ReactNode
+  exact?: boolean
 }
 
 // Define your route configuration
 const routes: RouteConfig[] = [
   {
     path: '/admin/manager-products',
-    element: <ManagerProducts />,
-    
+    element: <ManagerProducts />
+  },
+  {
+    path: '/admin/manager-products/create-product',
+    element: <CreateProduct />
   }
-  // You can add more routes here
 ]
 
-// Exporting routes for dynamic rendering in App.tsx or elsewhere
 export default function RouteConfiguration() {
   return (
     <Routes>

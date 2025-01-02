@@ -1,111 +1,201 @@
-import { Link } from 'react-router-dom';
-
-import { Home, Users, Settings, HelpCircle, Menu, Search, FileText, Layers, Layout, Salad } from 'lucide-react'
-import { useState } from 'react';
+import { useState } from 'react'
+import {
+  ChevronDown,
+  LayoutDashboard,
+  Package,
+  ShoppingCart,
+  Users,
+  Warehouse,
+  Tags,
+  Settings,
+  Store,
+  BarChart3,
+  MenuIcon
+} from 'lucide-react'
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [activeMenu, setActiveMenu] = useState('dashboard')
+  const [expandedMenus, setExpandedMenus] = useState(['products'])
 
-  const navItems = [
+  const menuItems = [
     {
-      title: 'Dashboard',
-      icon: <Home className='w-5 h-5' />,
-      notifications: 3
+      id: 'dashboard',
+      title: 'Tổng quan',
+      icon: <LayoutDashboard className='w-5 h-5' />,
+      href: '/admin/dashboard'
     },
-    { title: 'Quản lý hóa đơn', icon: <FileText className='w-5 h-5' /> },
-    { title: 'Quản lý sản phẩm', icon: <Salad className='w-5 h-5' /> ,href:'/admin/manager-products'},
     {
-      title: 'Quản lý danh mục sản phẩm',
-      icon: <Layers className='w-5 h-5' />
+      id: 'products',
+      title: 'Quản lý sản phẩm',
+      icon: <Package className='w-5 h-5' />,
+      href: '/admin/products',
+      subMenus: [
+        { id: 'all-products', title: 'Tất cả sản phẩm', href: '/admin/manager-products' },
+        { id: 'add-product', title: 'Thêm sản phẩm', href: '/admin/manager-products/create-product' },
+        { id: 'categories', title: 'Danh mục', href: '/admin/products/categories' }
+      ]
     },
-    { title: 'Quản lý bàn', icon: <Layout className='w-5 h-5' /> },
-    { title: 'Users', icon: <Users className='w-5 h-5' /> },
-    { title: 'Settings', icon: <Settings className='w-5 h-5' /> },
-    { title: 'Help', icon: <HelpCircle className='w-5 h-5' /> }
+    {
+      id: 'orders',
+      title: 'Quản lý đơn hàng',
+      icon: <ShoppingCart className='w-5 h-5' />,
+      href: '/admin/orders',
+      subMenus: [
+        { id: 'all-orders', title: 'Tất cả đơn hàng', href: '/admin/orders/all' },
+        { id: 'returns', title: 'Đơn hoàn trả', href: '/admin/orders/returns' }
+      ]
+    },
+    {
+      id: 'inventory',
+      title: 'Kho hàng',
+      icon: <Warehouse className='w-5 h-5' />,
+      href: '/admin/inventory'
+    },
+    {
+      id: 'marketing',
+      title: 'Marketing',
+      icon: <Tags className='w-5 h-5' />,
+      href: '/admin/marketing',
+      subMenus: [
+        { id: 'promotions', title: 'Khuyến mãi', href: '/admin/marketing/promotions' },
+        { id: 'vouchers', title: 'Mã giảm giá', href: '/admin/marketing/vouchers' }
+      ]
+    },
+    {
+      id: 'customers',
+      title: 'Khách hàng',
+      icon: <Users className='w-5 h-5' />,
+      href: '/admin/customers'
+    },
+    {
+      id: 'analytics',
+      title: 'Phân tích bán hàng',
+      icon: <BarChart3 className='w-5 h-5' />,
+      href: '/admin/analytics'
+    },
+    {
+      id: 'store-settings',
+      title: 'Thiết lập cửa hàng',
+      icon: <Store className='w-5 h-5' />,
+      href: '/admin/store-settings'
+    },
+    {
+      id: 'settings',
+      title: 'Cài đặt',
+      icon: <Settings className='w-5 h-5' />,
+      href: '/admin/settings'
+    }
   ]
 
+  const handleNavigate = (href) => {
+    window.location.href = href
+  }
+
+  const toggleMenu = (menuId) => {
+    if (expandedMenus.includes(menuId)) {
+      setExpandedMenus(expandedMenus.filter((id) => id !== menuId))
+    } else {
+      setExpandedMenus([...expandedMenus, menuId])
+    }
+  }
+
   return (
-    <nav
-      className={`
-      h-screen 
-    bg-gradient-to-b from-gray-900 to-black
-      text-gray-300
-      transition-all 
-      duration-300 
-      shadow-2xl
-      ${isCollapsed ? 'w-20' : 'w-72'}
-      flex 
-      flex-col
-      
-      left-0
-      top-0
-    `}
-    >
-      <div className='flex items-center justify-between p-6 border-b border-gray-800/50'>
-        {!isCollapsed && (
-          <div className='flex items-center gap-2'>
-            <div className='w-8 h-8 bg-white rounded-lg flex items-center justify-center'>
-              <span className='text-black font-bold text-xl'>A</span>
-            </div>
-            <h1 className='text-xl font-bold text-white'>Admin</h1>
-          </div>
-        )}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className='p-2 rounded-xl hover:bg-gray-800/50 transition-all duration-200'
+    <div className='flex h-screen'>
+      <nav
+        className={`
+        bg-white 
+        flex 
+        flex-col 
+        ${isCollapsed ? 'w-20' : 'w-64'} 
+        transition-all 
+        duration-300
+      `}
+      >
+        {/* Header */}
+        <div
+          className='h-16 flex items-center justify-between px-4 cursor-pointer'
+          onClick={() => handleNavigate('/admin/dashboard')}
         >
-          <Menu className='w-5 h-5' />
-        </button>
-      </div>
-
-      {!isCollapsed && (
-        <div className='px-4 py-4'>
-          <div className='flex items-center gap-2 px-4 py-2.5 bg-gray-800/30 rounded-xl'>
-            <Search className='w-4 h-4 text-gray-400' />
-            <input
-              type='text'
-              placeholder='Search...'
-              className='bg-transparent border-none outline-none text-sm w-full text-gray-300 placeholder-gray-500'
-            />
-          </div>
-        </div>
-      )}
-
-<div className='flex-1 py-4'>
-        {navItems.map((item, index) => (
-          <Link key={index} to={item.href}>
-            <div className='group relative flex items-center px-4 py-3 cursor-pointer hover:bg-gray-800/30 transition-all duration-200'>
-              <div className={`flex items-center gap-4 px-4 ${!isCollapsed ? 'w-full' : 'justify-center'}`}>
-                <div className='relative'>
-                  {item.icon}
-                  {item.notifications && (
-                    <span className='absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center text-xs'>
-                      {item.notifications}
-                    </span>
-                  )}
-                </div>
-                {!isCollapsed && <span className='font-medium'>{item.title}</span>}
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <div className='border-t border-gray-800/50 p-4'>
-        <div className='flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-800/30 rounded-xl transition-all duration-200'>
-          <div className='w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center'>
-            <span className='text-sm font-medium text-white'>JD</span>
-          </div>
           {!isCollapsed && (
-            <div className='flex-1'>
-              <p className='text-sm font-medium text-white'>John Doe</p>
-              <p className='text-xs text-gray-500'>Admin</p>
+            <div className='flex items-center'>
+              <span className='text-[#ee4d2d] font-bold text-xl'>Shopee Admin</span>
             </div>
           )}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsCollapsed(!isCollapsed)
+            }}
+            className='p-2 hover:bg-gray-100 rounded-lg'
+          >
+            <MenuIcon className='w-5 h-5 text-gray-500' />
+          </button>
         </div>
-      </div>
-    </nav>
+
+        {/* Navigation */}
+        <div className='flex-1 overflow-y-auto'>
+          {menuItems.map((item) => (
+            <div key={item.id}>
+              <div
+                onClick={() => {
+                  setActiveMenu(item.id)
+                  if (item.subMenus) {
+                    toggleMenu(item.id)
+                  } else {
+                    handleNavigate(item.href)
+                  }
+                }}
+                className={`
+                  flex items-center justify-between px-4 py-3 cursor-pointer
+                  ${activeMenu === item.id ? 'bg-[#fef6f5] text-[#ee4d2d]' : 'text-gray-700 hover:bg-gray-50'}
+                `}
+              >
+                <div className='flex items-center gap-3'>
+                  {item.icon}
+                  {!isCollapsed && <span className='font-medium'>{item.title}</span>}
+                </div>
+                {!isCollapsed && item.subMenus && (
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${expandedMenus.includes(item.id) ? 'rotate-180' : ''}`}
+                  />
+                )}
+              </div>
+
+              {/* SubMenus */}
+              {!isCollapsed && item.subMenus && expandedMenus.includes(item.id) && (
+                <div className='bg-gray-50'>
+                  {item.subMenus.map((subMenu) => (
+                    <div
+                      key={subMenu.id}
+                      onClick={() => handleNavigate(subMenu.href)}
+                      className='pl-12 pr-4 py-2 cursor-pointer text-sm text-gray-700 hover:text-[#ee4d2d]'
+                    >
+                      {subMenu.title}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* User Profile */}
+        <div className=' p-4 cursor-pointer' onClick={() => handleNavigate('/admin/profile')}>
+          <div className='flex items-center gap-3'>
+            <div className='w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center'>
+              <span className='text-sm font-medium text-gray-600'>AD</span>
+            </div>
+            {!isCollapsed && (
+              <div>
+                <p className='text-sm font-medium text-gray-800'>Admin Shop</p>
+                <p className='text-xs text-gray-500'>admin@shop.com</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+    </div>
   )
 }
 

@@ -7,10 +7,10 @@ export default function BaseLayout({ children }) {
       <div
         className='
                     flex-1 
-                    p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12
+                    p-2 sm:p-6 md:p-8 lg:p-10 xl:p-8
                     h-screen 
                     overflow-y-auto
-                    bg-gradient-to-b from-gray-800 to-black    
+                    bg-gray-100
                     shadow-xl
                 '
       >

@@ -7,8 +7,8 @@ export interface PagingFilterResponse<T> {
 }
 
 export interface PagingFilterRequest {
-  page: number
-  size: number
-  isPagingEnabled: boolean
-  orders: Record<string, string>
+  page?: number
+  size?: number
+  isPagingEnabled?: boolean
+  orders?: Record<string, string>
 }

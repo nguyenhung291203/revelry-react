@@ -49,33 +49,30 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
   return (
     <div className='flex justify-end mt-6 items-center space-x-2'>
-      {/* Prev button */}
       <button
         onClick={() => handlePageChange(currentPage - 1)}
-        className='rounded-xl w-[42px] h-[42px] text-white bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 flex items-center justify-center transition duration-300'
+        className='rounded-full w-10 h-10 text-white bg-[#ee4d2d] hover:bg-[#fce9e1] disabled:bg-[#f7f7f7] flex items-center justify-center transition duration-300'
         disabled={currentPage === 1}
       >
-        <FaChevronLeft className='w-3 h-3' />
+        <FaChevronLeft className='w-4 h-4' />
       </button>
 
-      {/* Page number buttons */}
       {getPageNumbers().map((page) => (
         <button
           key={page}
           onClick={() => handlePageChange(page)}
-          className={`w-[42px] h-[42px] text-white ${currentPage === page ? 'bg-gray-600' : 'bg-gray-600'} rounded-xl hover:bg-gray-700 transition duration-300 flex items-center justify-center`}
+          className={`w-10 h-10 text-white ${currentPage === page ? 'bg-[#ee4d2d] font-semibold' : 'bg-gray-600'} rounded-full hover:bg-[#fce9e1] transition duration-300 flex items-center justify-center`}
         >
           {page}
         </button>
       ))}
 
-      {/* Next button */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
-        className='rounded-xl w-[42px] h-[42px] text-white bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 flex items-center justify-center transition duration-300'
+        className='rounded-full w-10 h-10 text-white bg-[#ee4d2d] hover:bg-[#fce9e1] disabled:bg-[#f7f7f7] flex items-center justify-center transition duration-300'
         disabled={currentPage === totalPages}
       >
-        <FaChevronRight className='w-3 h-3' />
+        <FaChevronRight className='w-4 h-4' />
       </button>
     </div>
   )
