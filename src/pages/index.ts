@@ -1,1 +1,1 @@
-export * from './manager-produtcs'
+export { default as Home } from './home'
