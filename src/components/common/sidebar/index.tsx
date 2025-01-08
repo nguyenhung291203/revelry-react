@@ -31,9 +31,21 @@ const Sidebar = () => {
       icon: <Package className='w-5 h-5' />,
       href: '/admin/products',
       subMenus: [
-        { id: 'all-products', title: 'Tất cả sản phẩm', href: '/admin/manager-products' },
-        { id: 'add-product', title: 'Thêm sản phẩm', href: '/admin/manager-products/create-product' },
-        { id: 'categories', title: 'Danh mục', href: '/admin/products/categories' }
+        {
+          id: 'all-products',
+          title: 'Tất cả sản phẩm',
+          href: '/admin/manager-products'
+        },
+        {
+          id: 'add-product',
+          title: 'Thêm sản phẩm',
+          href: '/admin/manager-products/create-product'
+        },
+        {
+          id: 'categories',
+          title: 'Danh mục',
+          href: '/admin/products/categories'
+        }
       ]
     },
     {
@@ -42,7 +54,11 @@ const Sidebar = () => {
       icon: <ShoppingCart className='w-5 h-5' />,
       href: '/admin/orders',
       subMenus: [
-        { id: 'all-orders', title: 'Tất cả đơn hàng', href: '/admin/orders/all' },
+        {
+          id: 'all-orders',
+          title: 'Tất cả đơn hàng',
+          href: '/admin/orders/all'
+        },
         { id: 'returns', title: 'Đơn hoàn trả', href: '/admin/orders/returns' }
       ]
     },
@@ -58,8 +74,16 @@ const Sidebar = () => {
       icon: <Tags className='w-5 h-5' />,
       href: '/admin/marketing',
       subMenus: [
-        { id: 'promotions', title: 'Khuyến mãi', href: '/admin/marketing/promotions' },
-        { id: 'vouchers', title: 'Mã giảm giá', href: '/admin/marketing/vouchers' }
+        {
+          id: 'promotions',
+          title: 'Khuyến mãi',
+          href: '/admin/marketing/promotions'
+        },
+        {
+          id: 'vouchers',
+          title: 'Mã giảm giá',
+          href: '/admin/marketing/vouchers'
+        }
       ]
     },
     {

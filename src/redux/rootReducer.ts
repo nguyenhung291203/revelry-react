@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
-
-import { api } from '@/services/api/baseApi'
+import authReducer from './slices/authSlice'
+import { api } from '@/services/api'
 
 const rootReducer = combineReducers({
+  auth: authReducer,
   [api.reducerPath]: api.reducer
-  // Add other reducers here
 })
 
 export type RootState = ReturnType<typeof rootReducer>

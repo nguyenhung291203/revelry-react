@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",  // Đặt baseUrl là thư mục gốc của dự án
+    "baseUrl": ".", // Đặt baseUrl là thư mục gốc của dự án
     "paths": {
-      "@/*": ["src/*"]  // Alias @ trỏ đến thư mục src
+      "@/*": ["src/*"] // Alias @ trỏ đến thư mục src
     },
     "jsx": "react-jsx"
   },
   "include": [
-    "src/**/*.ts",   // Đảm bảo TypeScript nhận diện đúng thư mục src
-    "src/**/*.tsx"
-  ]
-
+    "src/**/*.ts", // Đảm bảo TypeScript nhận diện đúng thư mục src
+    "src/**/*.tsx" ]
 }

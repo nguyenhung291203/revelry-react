@@ -1,11 +1,9 @@
 import { Banner, BaseLayout } from '@/components/layout'
 
-const Home = () => {
+export default function HomePage() {
   return (
     <BaseLayout>
       <Banner />
     </BaseLayout>
   )
 }
-
-export default Home
