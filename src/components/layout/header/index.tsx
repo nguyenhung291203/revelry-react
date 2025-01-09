@@ -16,7 +16,7 @@ import {
   Gift
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import useNavigation from '@/utils/navigation'
+import { Link } from 'react-router-dom'
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -24,7 +24,6 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [hoveredItem, setHoveredItem] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const { goTo } = useNavigation()
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -193,11 +192,11 @@ const Header = () => {
                   <UserCircle className='w-6 h-6' />
                 </motion.button>
               ) : (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => goTo('/login')}
-                  className={`
+                <Link to='/login'>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`
                     flex items-center space-x-2 p-2 rounded-full
                     transition-colors duration-300
                     ${
@@ -206,10 +205,11 @@ const Header = () => {
                         : 'text-gray-700 hover:text-orange-400 hover:bg-white/10'
                     }
                   `}
-                >
-                  <LogIn className='w-6 h-6' />
-                  <span className='font-medium'>Login</span>
-                </motion.button>
+                  >
+                    <LogIn className='w-6 h-6' />
+                    <span className='font-medium'>Login</span>
+                  </motion.button>
+                </Link>
               )}
 
               {/* User Dropdown Menu */}
@@ -497,16 +497,17 @@ const Header = () => {
                       ))}
                     </>
                   ) : (
-                    <motion.button
-                      variants={slideInVariants}
-                      initial='hidden'
-                      animate='visible'
-                      onClick={() => goTo('/login')}
-                      className='w-full flex items-center justify-center space-x-2 px-4 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors duration-300'
-                    >
-                      <LogIn className='w-5 h-5' />
-                      <span>Login</span>
-                    </motion.button>
+                    <Link to='/login'>
+                      <motion.button
+                        variants={slideInVariants}
+                        initial='hidden'
+                        animate='visible'
+                        className='w-full flex items-center justify-center space-x-2 px-4 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors duration-300'
+                      >
+                        <LogIn className='w-5 h-5' />
+                        <span>Login</span>
+                      </motion.button>
+                    </Link>
                   )}
                 </div>
               </div>
