@@ -1,1 +1,2 @@
-export { default as IMAGES } from './images.ts'
+export { default as IMAGES } from './images'
+export { default as VALIDATIONS } from './validations'

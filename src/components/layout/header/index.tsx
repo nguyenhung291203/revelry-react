@@ -17,13 +17,14 @@ import {
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useAuth } from '@/hooks'
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [hoveredItem, setHoveredItem] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { isAuthenticated } = useAuth()
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -174,7 +175,7 @@ const Header = () => {
           <div className='flex items-center space-x-6 md:space-x-8'>
             {/* User Menu */}
             <div className='relative hidden lg:block'>
-              {isLoggedIn ? (
+              {isAuthenticated ? (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -479,7 +480,7 @@ const Header = () => {
 
                 {/* Mobile User Menu */}
                 <div className='mt-4 pt-4 border-t border-gray-100'>
-                  {isLoggedIn ? (
+                  {isAuthenticated ? (
                     <>
                       {userMenuItems.map((item, index) => (
                         <motion.a

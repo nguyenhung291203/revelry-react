@@ -15,8 +15,10 @@ export interface RegisterRequest {
   username: string
   phoneNumber: string
   email: string
+  fullName: string
   password: string
   confirmPassword: string
+  terms: boolean
 }
 
 export interface RefreshTokenResponse {
