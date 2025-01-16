@@ -11,6 +11,15 @@ export interface LoginRequest {
   password: string
 }
 
+export interface LoginWithSocialRequest {
+  email: string
+  image: string
+  phoneNumber: string
+  fullName: string
+  token: string
+  provider: 'LOCAL' | 'GOOGLE' | 'FACEBOOK'
+}
+
 export interface RegisterRequest {
   username: string
   phoneNumber: string

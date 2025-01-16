@@ -9,7 +9,8 @@ const axiosInstance: AxiosInstance = axios.create({
   timeout: API_CONFIG.TIMEOUT,
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  withCredentials: true
 })
 
 axiosInstance.interceptors.request.use(
@@ -95,7 +96,7 @@ axiosInstance.interceptors.response.use(
         tokenUtil.clearAccessToken()
         tokenUtil.clearRefreshToken()
         isRefreshing = false
-        window.location.href = '/login'
+        // window.location.href = '/login'
         return Promise.reject(refreshError)
       }
     }

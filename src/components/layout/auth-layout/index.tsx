@@ -1,3 +1,7 @@
+import { auth } from '@/config/firebase.config'
+import { useLoginWithSocialMutation } from '@/services/api/authenticationApi'
+import { LoginWithSocialRequest } from '@/types'
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { Chrome, Facebook } from 'lucide-react'
 import { Outlet } from 'react-router'
 
@@ -11,12 +15,40 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
   title = 'Chào mừng trở lại',
   subtitle = 'Hãy bắt đầu hành trình của bạn với chúng tôi'
 }) => {
-  const handleGoogleLogin = () => {
-    console.log('Logging in with Google')
+  const [loginWithSocialMutation, { isLoading, error }] = useLoginWithSocialMutation()
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider()
+    const { user } = await signInWithPopup(auth, provider)
+    const request: LoginWithSocialRequest = {
+      email: user.email,
+      fullName: user.displayName,
+      image: user.photoURL,
+      phoneNumber: user.phoneNumber,
+      token: await user.getIdToken(),
+      provider: 'GOOGLE'
+    }
+    const { result } = await loginWithSocialMutation(request).unwrap()
+    console.log({result})
+    return result
   }
 
-  const handleFacebookLogin = () => {
-    console.log('Logging in with Facebook')
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider()
+    const { user } = await signInWithPopup(auth, provider)
+    console.log({user})
+    const request: LoginWithSocialRequest = {
+      email: user.email,
+      fullName: user.displayName,
+      image: user.photoURL,
+      phoneNumber: user.phoneNumber,
+      token: await user.getIdToken(true),
+      provider: 'FACEBOOK'
+    }
+    console.log({request})
+    const { result } = await loginWithSocialMutation(request).unwrap()
+    console.log({result})
+    return result
   }
 
   return (
